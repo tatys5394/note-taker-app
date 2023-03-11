@@ -22,9 +22,9 @@ router.post('/notes', (req,res) => {
         .catch((err) => res.status(500).json(err));
 });
 
-// router.delete('/notes/:id', (req, res) => {
+// router.delete('/notes/', (req, res) => {
 //     store
-//         .deleteNotes(req.params.id)
+//         .deleteNotes(req.)
 //         .then(() => res.json())
 //         // if find an error return error message 
 //         .catch((err) => res.status(500).json(err));
