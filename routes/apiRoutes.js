@@ -1,33 +1,54 @@
+const path = require('path');
 const router = require('express').Router();
-const store = require('../db/store');
+const {v4: uuidv4} = require('uuid');
 
-// once receive request from ani/notes, respond with notes from db
+router.get("/api/notes", (req, res) => {
+    res.json(notes);
+    return console.log("success!");
+})
 
-router.get('/notes', (req, res) => {
-    store
-        .getNotes()
-        .then((notes) => {
-            return res.json(notes);
-        })
+router.get("/api/notes", (req, res) => {
+    let note; 
+    for(let i = 0; i < notes.length; i++) {
+        if (req.params.id === notes[i].id){
+            note = notes[i];
+            res.json(note);
+            return console.log("success!");
+        }}
+})
 
-        // if find an error return error message 
-        .catch((err) => res.status(500).json(err));
-});
+router.post("/api/notes", (req, res) => {
+    const {title} = req.body;
+    const {text} = req.body;
+    const newNote = {
+        title,
+        text,
+        id: uuid4()
+    };
+    notes.push(newNote);
+    fs.writeFile("./db/db.json", JSON.stringify(notes), err => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.json(notes);
+        }});
+    
+router.delete("/api/notes/:id", (req, res)  => {
+    for(let i = 0; i < notes.length; i++) {
+        if (req.params.id === notes[i].id){
+            note.splice(i,1);
+            return console.log("note deleted!");
+            res.status(200);
+            fs.writeFile("./db/db.json", JSON.stringify(notes), err => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json(notes);
+                } return
+            });
+        }}
+})
+}
+)
 
-router.post('/notes', (req,res) => {
-    store
-        .addNotes(req.body)
-        .then((notes) => res.json(notes))
-        // if find an error return error message 
-        .catch((err) => res.status(500).json(err));
-});
 
-router.delete('/notes/:id', (req, res) => {
-    store
-        .deleteNotes(req.params.id)
-        .then(() => res.json({ok: true}))
-        // if find an error return error message 
-        .catch((err) => res.status(500).json(err));
-});
-
-module.exports = router;
