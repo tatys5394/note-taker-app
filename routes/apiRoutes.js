@@ -61,7 +61,6 @@ router.delete("/notes/:id", (req, res) => {
         } else {
           res.json(filterNotes);
         }
-        console.log("note deleted!");
       });
        console.log(notes);
       })
