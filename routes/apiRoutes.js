@@ -31,7 +31,7 @@ router.post("/notes", (req, res) => {
     id: uuid4(),
   };
   notes.push(newNote);
-  fs.writeFileAsync("./db/db.json", JSON.stringify(notes), (err) => {
+  fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
     if (err) {
       console.log(err);
     } else {
@@ -41,32 +41,30 @@ router.post("/notes", (req, res) => {
 });
 
 router.delete("/notes/:id", (req, res) => {
-  console.log("note deleted!");
-  for (let i = 0; i < notes.length; i++) {
-    if (req.params.id === notes[i].id) {
-      notes.splice(i, 1);
       //asynchronously readFile with FS
-      fs.readFileAsync("./db/db.json",)
-      //That will give you an array of JSON objects
-
-      //parse array to have an array of JS object
-
-      //use JS filter method to exclude the object with a certain ID
-      //let id = req.params.id
-
-
-
-      res.status(200);
-      fs.writeFileAsync("./db/db.json", JSON.stringify(notes), (err) => {
+      fs.readFile("./db/db.json", "utf8", (err, data) => {
+        if (err) {
+          console.log(err);
+          return res.status(500);
+        }
+       const notes = JSON.parse(data)
+       const filterNotes = notes.filter((note) => {
+        if (note.id == req.params.id) {
+          return false
+        } else {
+          return true
+        }
+       })
+       fs.writeFile("./db/db.json", JSON.stringify(filterNotes), (err) => {
         if (err) {
           console.log(err);
         } else {
-          res.json(notes);
+          res.json(filterNotes);
         }
-        return;
+        console.log("note deleted!");
       });
-    }
-  }
+       console.log(notes);
+      })
 });
 
 module.exports = router;
