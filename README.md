@@ -61,7 +61,7 @@ In order to use this application the user must open up the browser, click on the
 Link to Video Demo: https://drive.google.com/file/d/1kkup7floQeQ0xZtQOca5-A0m3CSGhn-r/view?usp=sharing
 
 ## Links
-Deployed site:
+Deployed site: https://pacific-citadel-96313.herokuapp.com/
 Repo: https://github.com/tatys5394/note-taker-app.git
 
 
