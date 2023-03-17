@@ -1,25 +1,15 @@
 const path = require("path");
 const router = require("express").Router();
 const { v4: uuid4 } = require("uuid");
-const notes = require("../db/db.json");
 const fs = require("fs");
 
 // GET /api/notes
 router.get("/notes", (req, res) => {
-  res.json(notes);
-
-  return console.log("success!");
-});
-
-router.get("/notes", (req, res) => {
-  let note;
-  for (let i = 0; i < notes.length; i++) {
-    if (req.params.id === notes[i].id) {
-      note = notes[i];
-      res.json(note);
-      return console.log("success!");
-    }
-  }
+  fs.readFile('./db/db.json', (err, data) => {
+    if (err) console.error(err);
+    const notes = JSON.parse(data);
+    res.json(notes);
+  })
 });
 
 router.post("/notes", (req, res) => {
