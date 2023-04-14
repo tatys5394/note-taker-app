@@ -20,6 +20,7 @@ router.post("/notes", (req, res) => {
     text,
     id: uuid4(),
   };
+  const notes = JSON.parse(fs.readFileSync('./db/db.json',"utf-8"));
   notes.push(newNote);
   fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
     if (err) {
@@ -49,10 +50,11 @@ router.delete("/notes/:id", (req, res) => {
 
     fs.writeFile("./db/db.json", JSON.stringify(filterNotes), (err) => {
       if (err) {
+        res.status(500).json(err)
         console.log(err);
       } else {
         console.log(notes);
-        return res.status(200);
+        return res.status(200).json(notes);
       }
     });
   });
