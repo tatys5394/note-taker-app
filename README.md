@@ -58,10 +58,11 @@ In order to use this application the user must open up the browser, click on the
 ![logo](./pictures/notes.png)
 
 ## Walkthrough Video
-Link to Video Demo: https://drive.google.com/file/d/1kkup7floQeQ0xZtQOca5-A0m3CSGhn-r/view?usp=sharing
+Link to Video Demo: https://drive.google.com/file/d/1sFNyOCbO4evBTGDqzJkCWrdr4tlb4FJ_/view?usp=share_link
 
 ## Links
 Deployed site: https://pacific-citadel-96313.herokuapp.com/
+
 Repo: https://github.com/tatys5394/note-taker-app.git
 
 
